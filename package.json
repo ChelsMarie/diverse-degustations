@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ChelsMarie/diverse-degustations/issues"
   },
-  "homepage": "https://github.com/ChelsMarie/diverse-degustations#readme"
+  "homepage": "https://github.com/ChelsMarie/diverse-degustations#readme",
+  "dependencies": {
+    "mongodb": "^6.8.0"
+  }
 }
