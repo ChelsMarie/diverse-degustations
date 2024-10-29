@@ -1,0 +1,35 @@
+#logo {
+    width: 100px;
+}
+
+#navLinksDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--mui-palette-primary-main);
+}
+
+.navListItem {
+    list-style: none;
+    display: inline;
+    max-width: 150px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--mui-palette-text-primary);
+}
+
+.linkText {
+    color: var(--mui-palette-text-primary);
+    text-transform: capitalize;
+}
+
+
+
+.eatingMenu .MuiPaper-root {
+
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    background-color: var(--mui-palette-background-paper);
+}
