@@ -1,34 +1,55 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; 
-import Home from './pages/Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home/Home';
 import Eating from './pages/Eating/Eating';
 import Wearing from './pages/Wearing/Wearing';
 import Links from './pages/Links/Links';
-import Contact from './pages/Contact/Contact';
 import PageNotFound from './pages/PageNotFound';
+import NavBar from './pages/Navbar/NavBar';
+import { createTheme, Theme, ThemeProvider } from '@mui/material/styles';
+import { components, dark, light, typography } from './theme/theme';
+import About from './pages/About/About';
 
 function App() {
+  const theme: Theme = useMemo(
+    () =>
+      createTheme({
+        cssVariables: {
+          colorSchemeSelector: 'data'
+        },
+        colorSchemes: {
+          light: light,
+          dark: dark
+        },
+        typography: typography,
+        components: components
+      }),
+    []
+  );
+
+
   return (
-    <Router>
-      <nav>
-        <Link to="/">Home</Link> <br/> 
-        <Link to="/eating">Eating</Link> <br/> 
-        <Link to="/wearing">Wearing</Link> <br/> 
-        <Link to="/links">Links</Link> <br/> 
-        <Link to="/contact">Contact</Link> <br/> 
+    <>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <NavBar />
 
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/eating" element={<Eating />} />
-        <Route path="/wearing" element={<Wearing />} />
-        <Route path="/links" element={<Links />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<PageNotFound />} />
 
-      </Routes>
-    </Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/eating" element={<Eating />} />
+            <Route path="/wearing" element={<Wearing />} />
+            <Route path="/links" element={<Links />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<PageNotFound />} />
+
+          </Routes>
+        </Router>
+
+
+      </ThemeProvider>
+    </>
   );
 }
 

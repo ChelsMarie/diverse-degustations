@@ -9,12 +9,21 @@
       "dom",
       "esnext"
     ],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ],
     "strict": true,
-    "sourceMap": true,    
+    "sourceMap": true,
     "allowJs": true,
     "resolveJsonModule": true,
     "noEmit": true
   },
-  "include": ["./**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

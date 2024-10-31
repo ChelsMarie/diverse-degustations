@@ -25,11 +25,22 @@
     text-transform: capitalize;
 }
 
-
+.menuItemText {
+    justify-content: center !important;
+}
 
 .eatingMenu .MuiPaper-root {
 
     border-radius: 0px !important;
     box-shadow: none !important;
     background-color: var(--mui-palette-background-paper);
+}
+
+.active {
+    background-color: var(--mui-palette-primary-light) !important;
+
+    &:active {
+        background-color: var(--mui-palette-primary-light) !important;
+    }
+
 }

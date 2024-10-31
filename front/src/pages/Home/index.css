@@ -1,0 +1,17 @@
+.upperHomeText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.subHomeText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardContainer {
+    padding-left: 150px;
+    padding-right: 150px;
+}

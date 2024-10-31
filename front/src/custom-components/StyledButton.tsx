@@ -1,24 +1,21 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Button, ButtonProps } from '@mui/material';
-import { forwardRef } from 'react';
 
 const StyledButton = styled(Button)(({ }) => ({
-    boxShadow: 'none !important',
-    border: 'none !important',
-    borderRadius: '0px !important',
+    boxShadow: 'none ',
+    border: 'none ',
+    borderRadius: '0px ',
     backgroundColor: 'transparent',
-    height: 'calc(100%) !important',
-
-    '&:focus': {
-        backgroundColor: 'var(--mui-palette-primary-light) !important',
-    },
+    height: '80px ',
     '&:hover': {
-        backgroundColor: 'var(--mui-palette-primary-light) !important',
+        backgroundColor: 'var(--mui-palette-primary-light) ',
+        '& .linkText': {
+            color: '#DEAC4B !important'
+        }
     },
-    '&:active': {
-        backgroundColor: 'var(--mui-palette-primary-light) !important',
-    }
+
+
 }));
 
 type NavButtonProps = ButtonProps & {
@@ -32,7 +29,6 @@ const NavButton = React.forwardRef<HTMLButtonElement, NavButtonProps>(
             <StyledButton
                 {...props} // Spread the remaining props
                 ref={ref} // Pass the ref to StyledButton
-                disableRipple={true}
             >
                 {children}
             </StyledButton>

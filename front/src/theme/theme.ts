@@ -2,8 +2,23 @@ import { ColorSystemOptions } from "@mui/material";
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 export const typography: TypographyOptions = {
-    h6: {
+    h1: {
+        fontSize: '30px',
+        fontWeight: 'bolder',
+        fontFamily: 'optima'
+    },
+    h4: {
         fontSize: '20px',
+        fontWeight: 'bold',
+        fontFamily: 'optima'
+    },
+    h6: {
+        fontSize: '16px',
+        fontWeight: 'bold',
+        fontFamily: 'optima'
+    },
+    subtitle1: {
+        fontSize: '14px',
         fontWeight: 'bold',
         fontFamily: 'optima'
     }
@@ -35,7 +50,7 @@ export const light: ColorSystemOptions = {
         },
         secondary: {
             main: "#E7D1A7",
-            light: "#ffffff",
+            light: "#d4ae63",
             dark: "#CFAE6E",
             contrastText: "#ffffff"
         },
@@ -64,7 +79,7 @@ export const dark: ColorSystemOptions = {
         },
         secondary: {
             main: "#130D00",
-            light: "#442F06",
+            light: "#33230e",
             dark: "#000000",
             contrastText: "#ffffff"
         },
@@ -74,7 +89,10 @@ export const dark: ColorSystemOptions = {
         },
         background: {
             default: "#3A230D",
-            paper: "#301E0C"
+            paper: "#2e1a06"
+        },
+        error: {
+            main: "#A98849"
         },
         divider: "#846330" //border color
     }

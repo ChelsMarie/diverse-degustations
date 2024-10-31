@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
-import { Button, ListItem, Menu, MenuItem, Switch, Typography, useColorScheme } from "@mui/material";
+import { ListItem, Menu, MenuItem, Switch, Typography, useColorScheme } from "@mui/material";
 import './index.css';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import NavButton from "../../custom-components/StyledButton";
@@ -11,11 +11,8 @@ function NavBar() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const menuOpen = Boolean(anchorEl);
     const myRef = useRef<HTMLButtonElement | null>(null);
-    const buttonWidth = myRef?.current?.clientWidth ?? null;
+    const [activeButton, setActiveButton] = useState<string | null>(null);
 
-    useEffect(() => {
-        console.log("Button width: ", buttonWidth, 'px');
-    }, [buttonWidth]);
 
     const toggleTheme = () => {
         setMode(mode === 'dark' ? 'light' : 'dark');
@@ -23,10 +20,12 @@ function NavBar() {
 
     const handleClickMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
+        setActiveButton('eating');
     }
 
     const handleCloseMenu = () => {
         setAnchorEl(null);
+        setActiveButton(null);
     };
 
 
@@ -34,81 +33,102 @@ function NavBar() {
         <>
             <nav id="navContainer">
                 <div id="navLinksDiv" >
-                    <ListItem className="navListItem">
-                        <Link className="navLink" to="/">
-                            <img id="logo" alt="No logo" src={Logo}></img>
-                        </Link>
-                    </ListItem>
+                    <NavButton className="navListItem" sx={{ backgroundColor: 'transparent !important' }}>
+                        <ListItem>
+                            <Link className="navLink" to="/">
+                                <img id="logo" alt="No logo" src={Logo}></img>
+                            </Link>
+                        </ListItem>
+                    </NavButton>
 
-                    <ListItem className="navListItem">
+                    <NavButton
+                        onClick={handleClickMenu}
+                        aria-controls={menuOpen ? 'positioned-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={menuOpen ? 'true' : undefined}
+                        endIcon={<KeyboardArrowDownIcon color="error" style={{ marginLeft: '-5px' }} />}
+                        className={`navListItem ${activeButton === 'eating' ? 'active' : ''}`} // Conditionally add 'active' class
+                        ref={myRef}
+                    >
 
-                        <NavButton
-                            variant="contained"
-                            onClick={handleClickMenu}
-                            aria-controls={menuOpen ? 'positioned-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={menuOpen ? 'true' : undefined}
-                            endIcon={<KeyboardArrowDownIcon color="error" style={{ marginLeft: '-5px' }} />}
-                            className="linkButton"
-                            ref={myRef}
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
-                        >
+                        <ListItem >
 
-                            <Typography className="linkText" variant="h6">
+                            <Typography className="linkText" variant="h4">
                                 Eating
                             </Typography>
 
-                            <Menu
-                                open={menuOpen}
-                                onClose={handleCloseMenu}
-                                className="eatingMenu"
-                                anchorEl={anchorEl}
-                            >
-                                <MenuItem>All</MenuItem>
-                                <MenuItem>Michelin</MenuItem>
-                                <MenuItem>Café</MenuItem>
-                                <MenuItem>Eatery</MenuItem>
-                                <MenuItem>Desserts</MenuItem>
 
-                            </Menu>
 
                             {/* <Link className="navLink" to="/eating">
-      
+        
                             </Link> */}
-                        </NavButton>
-                    </ListItem>
+                        </ListItem>
 
+                    </NavButton>
 
+                    <NavButton className="navListItem">
+                        <ListItem>
+                            <Link className="navLink" to="/wearing">
+                                <Typography variant="h4" className="linkText">
+                                    Wearing
+                                </Typography>
 
-                    <ListItem className="navListItem">
-                        <Link className="navLink" to="/wearing">
-                            <Typography variant="h6">
-                                Wearing
-                            </Typography>
+                            </Link>
+                        </ListItem>
+                    </NavButton>
 
-                        </Link>
-                    </ListItem>
+                    <NavButton className="navListItem">
+                        <ListItem>
+                            <Link className="navLink" to="/links">
+                                <Typography variant="h4" className="linkText">
+                                    Links
+                                </Typography>
+                            </Link>
+                        </ListItem>
+                    </NavButton>
 
-                    <ListItem className="navListItem">
-                        <Link className="navLink" to="/links">
-                            <Typography variant="h6">
-                                Links
-                            </Typography>
-                        </Link>
-                    </ListItem>
-
-                    <ListItem className="navListItem">
-                        <Link className="navLink" to="/contact">
-                            <Typography variant="h6">
-                                Contact
-                            </Typography>
-                        </Link>
-                    </ListItem>
+                    <NavButton className="navListItem">
+                        <ListItem>
+                            <Link className="navLink" to="/about">
+                                <Typography variant="h4" className="linkText">
+                                    About
+                                </Typography>
+                            </Link>
+                        </ListItem>
+                    </NavButton>
 
                     <Switch
                         onChange={toggleTheme}
                     />
+
+                    <Menu
+                        open={menuOpen}
+                        onClose={handleCloseMenu}
+                        className="eatingMenu"
+                        anchorEl={anchorEl}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left'
+                        }}
+                        MenuListProps={{
+                            sx: { width: anchorEl && anchorEl.offsetWidth }
+                        }}
+
+                        slotProps={{
+                            paper: {
+                                sx: {
+                                    '--Paper-overlay': 'none !important'
+                                },
+                            },
+                        }}
+                    >
+                        <MenuItem className="menuItemText"> <Typography variant="subtitle1"> All </Typography></MenuItem>
+                        <MenuItem className="menuItemText"> <Typography variant="subtitle1"> Michelin </Typography></MenuItem>
+                        <MenuItem className="menuItemText"> <Typography variant="subtitle1"> Café </Typography></MenuItem>
+                        <MenuItem className="menuItemText"> <Typography variant="subtitle1"> Eatery </Typography></MenuItem>
+                        <MenuItem className="menuItemText"> <Typography variant="subtitle1"> Desserts </Typography></MenuItem>
+
+                    </Menu>
                 </div>
 
             </nav>
